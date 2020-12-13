@@ -22,8 +22,8 @@
 </template>
 
 <script>
-import { useCalculator } from "../calculator";
-import { useCPU } from "../cpu";
+import { useCalculator } from "../functions/calculator";
+import { useCPU } from "../functions/cpu";
 import Expression from './Expression.vue'
 
 export default {
