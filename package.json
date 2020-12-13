@@ -1,0 +1,18 @@
+{
+  "name": "custom_pod",
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build"
+  },
+  "dependencies": {
+    "@adobe/coral-spectrum": "^4.10.11",
+    "vue": "^3.0.4"
+  },
+  "devDependencies": {
+    "@vue/compiler-sfc": "^3.0.4",
+    "eslint": "^7.15.0",
+    "eslint-plugin-vue": "^7.2.0",
+    "vite": "^1.0.0-rc.13"
+  }
+}
