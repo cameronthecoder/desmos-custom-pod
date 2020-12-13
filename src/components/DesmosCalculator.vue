@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import { useCalculator } from "../functions/calculator";
+import { useCalculator } from "@/functions/calculator";
 import { useCPU } from "../functions/cpu";
 import Expression from './Expression.vue'
 
