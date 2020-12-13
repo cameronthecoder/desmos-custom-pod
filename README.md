@@ -41,10 +41,10 @@ yarn run build
 npm run build
 ```
 
-- In the `dist/_assets` file:
+- In the `dist/_assets` folder:
   - Rename `index-{hash}.js` to `index.js`
   - Rename `style-{hash}.js` to `style.css`
-- Remove the `/` at the beginning of the paths in the HTML file. You will also need to change the paths in the HTML file to match the corresponding files in the `_assets` folder.
+- Remove the `/` at the beginning of the paths in the `dist/index.html` file. You will also need to change the paths in the HTML file to match the corresponding files in the `_assets` folder.
 - Compress the `dist` folder and upload it into an Adobe Connect share pod. You should see a coordinate plane and an expressions panel to the left.
 
 # License
