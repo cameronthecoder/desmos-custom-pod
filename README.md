@@ -45,7 +45,8 @@ npm run build
   - Rename `index-{hash}.js` to `index.js`
   - Rename `style-{hash}.js` to `style.css`
 - Remove the `/` at the beginning of the paths in the `dist/index.html` file. You will also need to change the paths in the HTML file to match the corresponding files in the `_assets` folder.
-- Compress the `dist` folder and upload it into an Adobe Connect share pod. You should see a coordinate plane and an expressions panel to the left.
+- Rename `dist/index.html` to `CoordinatePlanePod_html5.htm`. **No, that was not a typo, it has to be with the `.htm` extension.**
+- Compress the `dist` folder into a `.zip` file and upload it into an Adobe Connect share pod. You should see a coordinate plane and an expressions panel to the left.
 
 # License
 
