@@ -11,6 +11,7 @@ export function useCPU() {
   };
 
   const getConfig = () => {
+    // TODO: Change to getMyUserDetails
     return cpu.value.getConfig();
   };
 

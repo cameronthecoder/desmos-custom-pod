@@ -15,6 +15,7 @@ export function useCalculator() {
       const data = JSON.parse(lastEvent.value);
       if (data.userID == userID || !data.userID) {
         console.log("sending data");
+        console.log(cpu.value);
         cpu.value.dispatchSyncMessage(
           "changeCalc",
           JSON.stringify({
@@ -47,10 +48,8 @@ export function useCalculator() {
       const userConfig = getConfig();
       calculator.value = Desmos.GraphingCalculator(
         calc.value,
-        getOptions(userConfig.role) || "owner"
+        getOptions(userConfig.role)
       );
-      cpu.value.registerCallback("roleChanged", onRoleChanged);
-      cpu.value.registerCallback("syncMessageReceived", onSyncMessageReceived);
     } else {
       calculator.value = Desmos.GraphingCalculator(calc.value, "owner");
     }
