@@ -4,10 +4,14 @@ import { useCPU } from "./cpu";
 const { cpu, getConfig } = useCPU();
 const calculator = ref(null);
 const expressions = ref();
+const lastEvent = ref("{}");
 
 export function useCalculator() {
   const calc = ref(null);
-  const lastEvent = ref("{}");
+
+  const setLastEvent = (data) => {
+    lastEvent.value = data;
+  };
 
   const onCalculatorStateChanged = () => {
     if (cpu.value != null) {
@@ -21,9 +25,8 @@ export function useCalculator() {
           false
         );
       }
-      lastEvent.value = "{}";
+      setLastEvent("{}");
     }
-    console.log(calculator.value.getExpressions());
     expressions.value = calculator.value.getExpressions();
   };
 
@@ -55,7 +58,8 @@ export function useCalculator() {
     getOptions,
     calculator: computed(() => calculator.value),
     expressions: computed(() => expressions.value),
-    lastEvent,
+    lastEvent: computed(() => lastEvent.value),
     calc,
+    setLastEvent,
   };
 }

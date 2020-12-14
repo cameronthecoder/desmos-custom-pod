@@ -1,6 +1,6 @@
 import { computed, onMounted, ref } from "vue";
 import { useCalculator } from "./calculator";
-const { calculator, getOptions, lastEvent } = useCalculator();
+const { calculator, getOptions, lastEvent, setLastEvent } = useCalculator();
 const cpu = ref(null);
 
 export function useCPU() {
@@ -8,11 +8,9 @@ export function useCPU() {
 
   const onConfigured = () => {
     console.log("Configured");
-    console.log(calculator.value, lastEvent.value);
   };
 
   const getConfig = () => {
-    // TODO: Change to getMyUserDetails
     return cpu.value.getConfig();
   };
 
@@ -30,9 +28,7 @@ export function useCPU() {
     switch (msg.msgNm) {
       case "changeCalc":
         console.log("change calc has been received");
-        lastEvent.value = msg.msgVal;
-        console.log("lastevent:", lastEvent.value);
-        console.log("msgval: ", msg.msgVal);
+        setLastEvent(msg.msgVal);
         const data = JSON.parse(msg.msgVal);
         calculator.value.setState(data.calc);
         break;
