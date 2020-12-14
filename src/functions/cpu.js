@@ -1,6 +1,6 @@
 import { computed, onMounted, ref } from "vue";
 import { useCalculator } from "./calculator";
-const { calculator, getOptions } = useCalculator();
+const { calculator, getOptions, lastEvent } = useCalculator();
 const cpu = ref(null);
 
 export function useCPU() {
@@ -8,6 +8,7 @@ export function useCPU() {
 
   const onConfigured = () => {
     console.log("Configured");
+    console.log(calculator.value, lastEvent.value);
   };
 
   const getConfig = () => {
@@ -15,20 +16,26 @@ export function useCPU() {
     return cpu.value.getConfig();
   };
 
-  const onRoleChanged = () => {
+  const onRoleChanged = (e) => {
     const userConfig = getConfig();
-    role.value = userConfig.role;
-    calculator.value.setOptions(getOptions(userConfig.role));
+    if (e.userId == userConfig.userID) {
+      console.log("user role has changed");
+      role.value = userConfig.role;
+      calculator.value.setOptions(getOptions(userConfig.role));
+    }
   };
 
   const onSyncMessageReceived = (msg) => {
+    console.log(msg);
     switch (msg.msgNm) {
       case "changeCalc":
+        console.log("change calc has been received");
         lastEvent.value = msg.msgVal;
+        console.log("lastevent:", lastEvent.value);
+        console.log("msgval: ", msg.msgVal);
         const data = JSON.parse(msg.msgVal);
         calculator.value.setState(data.calc);
         break;
-
       default:
         break;
     }
@@ -45,7 +52,7 @@ export function useCPU() {
           "connectsdkhook"
         );
         cpu.value.registerCallback(
-          "onSyncMessageReceived",
+          "syncMessageReceived",
           onSyncMessageReceived
         );
         role.value = getConfig().role;

@@ -14,14 +14,9 @@ export function useCalculator() {
       const userID = getConfig().userID;
       const data = JSON.parse(lastEvent.value);
       if (data.userID == userID || !data.userID) {
-        console.log("sending data");
-        console.log(cpu.value);
         cpu.value.dispatchSyncMessage(
           "changeCalc",
-          JSON.stringify({
-            calc: calculator.value.getState(),
-            userID: userID,
-          }),
+          JSON.stringify({ calc: calculator.value.getState(), userID: userID }),
           false,
           false
         );
@@ -60,6 +55,7 @@ export function useCalculator() {
     getOptions,
     calculator: computed(() => calculator.value),
     expressions: computed(() => expressions.value),
+    lastEvent,
     calc,
   };
 }
