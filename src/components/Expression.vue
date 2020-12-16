@@ -7,12 +7,14 @@
         class="expression_color"
         :style="{backgroundColor: expression.color}"
       />
-      <h3>{{ expression.latex }}</h3>
+      <h3 ref="expressionLatex" />
     </div>
   </div>
 </template>
 
 <script>
+import { watch, onMounted, ref, watchEffect } from 'vue';
+import katex from 'katex';
 export default {
     props: {
         expression: {
@@ -20,6 +22,24 @@ export default {
             default: () => {},
             required: true
         }
+    },
+    setup(props) {
+      const expressionLatex = ref();
+      let latexToHTML;
+
+      onMounted(() => {
+          latexToHTML = watchEffect(() => {
+        katex.render(props.expression.latex, expressionLatex.value, {
+            throwOnError: true
+        });
+      })
+
+      });
+
+      return {
+        expressionLatex,
+        latexToHTML
+      }
     }
 }
 </script>

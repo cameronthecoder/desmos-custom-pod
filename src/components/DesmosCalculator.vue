@@ -1,23 +1,36 @@
 <template>
-  <div id="toolbar" />
-  <div id="container">
-    <div
-      v-if="role == 'viewer'"
-      id="expressions_panel"
+  <div id="col-container">
+    <div 
+      v-if="role == 'owner'"
+      id="toolbar" 
     >
-      <h1>Expressions</h1>
-      <div
-        v-for="expression in expressions" 
-        id="expressions"
-        :key="expression.id"
+      <button
+        is="coral-button" 
+        variant="cta"
+        size="small"
       >
-        <Expression :expression="expression" />
-      </div>
+        Enable Participant Access
+      </button>
     </div>
-    <div
-      id="calculator"
-      ref="calc"
-    />
+    <div id="container">
+      <div
+        v-if="role == 'viewer'"
+        id="expressions_panel"
+      >
+        <h1>Expressions</h1>
+        <div
+          v-for="expression in expressions" 
+          id="expressions"
+          :key="expression.id"
+        >
+          <Expression v-if="expression.latex" :expression="expression" />
+        </div>
+      </div>
+      <div
+        id="calculator"
+        ref="calc"
+      />
+    </div>
   </div>
 </template>
 
@@ -41,27 +54,36 @@ export default {
 </script>
 <style>
 #toolbar {
-  height: 20px;
+  padding: 2px;
+}
+#col-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 #container {
   display: flex;
-  justify-content: center;
+  padding: 10px;
   overflow: hidden;
+  flex-grow: 1;
 }
 #calculator {
   width: 100%;
-  height: 100vh;
 }
 #expressions_panel {
   width: 300px;
-  padding: 15px;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  flex: none;
 }
 #expressions_panel h1 {
   text-align: center;
+  margin: 0;
 }
 #expressions {
   display: flex;
   flex-direction: column;
-  gap: 20px 20px;
 }
 </style>

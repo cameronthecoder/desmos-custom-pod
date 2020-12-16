@@ -55,6 +55,7 @@ export function useCPU() {
         cpu.value.registerCallback("roleChanged", onRoleChanged);
       }
     } else {
+      role.value = "viewer";
       console.warn("SDK not defined");
     }
   });

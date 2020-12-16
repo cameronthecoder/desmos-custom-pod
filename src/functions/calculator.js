@@ -37,7 +37,7 @@ export function useCalculator() {
       expressions: role == "presenter" || role == "owner",
       images: role == "presenter" || role == "owner",
       lockViewport: role === "viewer",
-      border: true,
+      keypad: role === "presenter" || role == "owner",
     };
   };
 
@@ -49,7 +49,10 @@ export function useCalculator() {
         getOptions(userConfig.role)
       );
     } else {
-      calculator.value = Desmos.GraphingCalculator(calc.value, "owner");
+      calculator.value = Desmos.GraphingCalculator(
+        calc.value,
+        getOptions("owner")
+      );
     }
     calculator.value.observeEvent("change", onCalculatorStateChanged);
   });
