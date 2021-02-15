@@ -1,4 +1,5 @@
 # desmos-custom-pod
+**This project has been placed in read-only mode. See [this repo](https://github.com/cameronthecoder/desmos-pod) for the updated version**
 
 An interactive version of Desmos made for Adobe Connect.
 
